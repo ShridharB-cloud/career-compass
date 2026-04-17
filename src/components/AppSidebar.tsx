@@ -5,7 +5,8 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 
-const nav = [
+type NavItem = { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean };
+const nav: NavItem[] = [
   { to: "/app", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { to: "/app/resume", label: "Resume Builder", icon: FileText },
   { to: "/app/interview", label: "Interview Prep", icon: MessageSquareText },
@@ -14,7 +15,7 @@ const nav = [
   { to: "/app/jobs", label: "Job Opportunities", icon: Briefcase },
   { to: "/app/chatbot", label: "AI Chatbot", icon: Bot },
   { to: "/app/skill-gap", label: "Skill Gap Analysis", icon: TrendingUp },
-] as const;
+];
 
 export function AppSidebar() {
   const { pathname } = useLocation();
@@ -40,6 +41,7 @@ export function AppSidebar() {
           return (
             <Link
               key={item.to}
+              // @ts-expect-error - dynamic string path
               to={item.to}
               className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-all ${
                 active

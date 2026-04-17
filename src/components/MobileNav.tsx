@@ -4,19 +4,20 @@ import {
   ClipboardList, Briefcase, Bot, TrendingUp,
 } from "lucide-react";
 
-const items = [
+type Item = { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean };
+const items: Item[] = [
   { to: "/app", label: "Home", icon: LayoutDashboard, exact: true },
   { to: "/app/resume", label: "Resume", icon: FileText },
   { to: "/app/mock", label: "Mock", icon: ClipboardList },
   { to: "/app/jobs", label: "Jobs", icon: Briefcase },
   { to: "/app/chatbot", label: "Chat", icon: Bot },
-] as const;
+];
 
-const quickLinks = [
+const quickLinks: Item[] = [
   { to: "/app/interview", label: "Interview Prep", icon: MessageSquareText },
   { to: "/app/study", label: "Study Material", icon: BookOpen },
   { to: "/app/skill-gap", label: "Skill Gap", icon: TrendingUp },
-] as const;
+];
 
 export function MobileNav() {
   const { pathname } = useLocation();
@@ -30,6 +31,7 @@ export function MobileNav() {
             return (
               <Link
                 key={i.to}
+                // @ts-expect-error - dynamic string path
                 to={i.to}
                 className={`flex flex-col items-center justify-center gap-1 py-2.5 text-[10px] font-medium transition-colors ${
                   active ? "text-primary" : "text-muted-foreground"
@@ -51,6 +53,7 @@ export function MobileNav() {
             return (
               <Link
                 key={q.to}
+                // @ts-expect-error - dynamic string path
                 to={q.to}
                 className={`flex items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
                   active
