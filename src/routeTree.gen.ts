@@ -13,6 +13,14 @@ import { Route as SignupRouteImport } from './routes/signup'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppStudyRouteImport } from './routes/app.study'
+import { Route as AppSkillGapRouteImport } from './routes/app.skill-gap'
+import { Route as AppResumeRouteImport } from './routes/app.resume'
+import { Route as AppMockRouteImport } from './routes/app.mock'
+import { Route as AppJobsRouteImport } from './routes/app.jobs'
+import { Route as AppInterviewRouteImport } from './routes/app.interview'
+import { Route as AppChatbotRouteImport } from './routes/app.chatbot'
 
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
@@ -34,37 +42,136 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppStudyRoute = AppStudyRouteImport.update({
+  id: '/study',
+  path: '/study',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSkillGapRoute = AppSkillGapRouteImport.update({
+  id: '/skill-gap',
+  path: '/skill-gap',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppResumeRoute = AppResumeRouteImport.update({
+  id: '/resume',
+  path: '/resume',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMockRoute = AppMockRouteImport.update({
+  id: '/mock',
+  path: '/mock',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppJobsRoute = AppJobsRouteImport.update({
+  id: '/jobs',
+  path: '/jobs',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppInterviewRoute = AppInterviewRouteImport.update({
+  id: '/interview',
+  path: '/interview',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppChatbotRoute = AppChatbotRouteImport.update({
+  id: '/chatbot',
+  path: '/chatbot',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/app': typeof AppRoute
+  '/app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/app/chatbot': typeof AppChatbotRoute
+  '/app/interview': typeof AppInterviewRoute
+  '/app/jobs': typeof AppJobsRoute
+  '/app/mock': typeof AppMockRoute
+  '/app/resume': typeof AppResumeRoute
+  '/app/skill-gap': typeof AppSkillGapRoute
+  '/app/study': typeof AppStudyRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/app': typeof AppRoute
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/app/chatbot': typeof AppChatbotRoute
+  '/app/interview': typeof AppInterviewRoute
+  '/app/jobs': typeof AppJobsRoute
+  '/app/mock': typeof AppMockRoute
+  '/app/resume': typeof AppResumeRoute
+  '/app/skill-gap': typeof AppSkillGapRoute
+  '/app/study': typeof AppStudyRoute
+  '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/app': typeof AppRoute
+  '/app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
+  '/app/chatbot': typeof AppChatbotRoute
+  '/app/interview': typeof AppInterviewRoute
+  '/app/jobs': typeof AppJobsRoute
+  '/app/mock': typeof AppMockRoute
+  '/app/resume': typeof AppResumeRoute
+  '/app/skill-gap': typeof AppSkillGapRoute
+  '/app/study': typeof AppStudyRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app' | '/login' | '/signup'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/login'
+    | '/signup'
+    | '/app/chatbot'
+    | '/app/interview'
+    | '/app/jobs'
+    | '/app/mock'
+    | '/app/resume'
+    | '/app/skill-gap'
+    | '/app/study'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/app' | '/login' | '/signup'
-  id: '__root__' | '/' | '/app' | '/login' | '/signup'
+  to:
+    | '/'
+    | '/login'
+    | '/signup'
+    | '/app/chatbot'
+    | '/app/interview'
+    | '/app/jobs'
+    | '/app/mock'
+    | '/app/resume'
+    | '/app/skill-gap'
+    | '/app/study'
+    | '/app'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/login'
+    | '/signup'
+    | '/app/chatbot'
+    | '/app/interview'
+    | '/app/jobs'
+    | '/app/mock'
+    | '/app/resume'
+    | '/app/skill-gap'
+    | '/app/study'
+    | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AppRoute: typeof AppRoute
+  AppRoute: typeof AppRouteWithChildren
   LoginRoute: typeof LoginRoute
   SignupRoute: typeof SignupRoute
 }
@@ -99,15 +206,104 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/study': {
+      id: '/app/study'
+      path: '/study'
+      fullPath: '/app/study'
+      preLoaderRoute: typeof AppStudyRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/skill-gap': {
+      id: '/app/skill-gap'
+      path: '/skill-gap'
+      fullPath: '/app/skill-gap'
+      preLoaderRoute: typeof AppSkillGapRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/resume': {
+      id: '/app/resume'
+      path: '/resume'
+      fullPath: '/app/resume'
+      preLoaderRoute: typeof AppResumeRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/mock': {
+      id: '/app/mock'
+      path: '/mock'
+      fullPath: '/app/mock'
+      preLoaderRoute: typeof AppMockRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/jobs': {
+      id: '/app/jobs'
+      path: '/jobs'
+      fullPath: '/app/jobs'
+      preLoaderRoute: typeof AppJobsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/interview': {
+      id: '/app/interview'
+      path: '/interview'
+      fullPath: '/app/interview'
+      preLoaderRoute: typeof AppInterviewRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/chatbot': {
+      id: '/app/chatbot'
+      path: '/chatbot'
+      fullPath: '/app/chatbot'
+      preLoaderRoute: typeof AppChatbotRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppChatbotRoute: typeof AppChatbotRoute
+  AppInterviewRoute: typeof AppInterviewRoute
+  AppJobsRoute: typeof AppJobsRoute
+  AppMockRoute: typeof AppMockRoute
+  AppResumeRoute: typeof AppResumeRoute
+  AppSkillGapRoute: typeof AppSkillGapRoute
+  AppStudyRoute: typeof AppStudyRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppChatbotRoute: AppChatbotRoute,
+  AppInterviewRoute: AppInterviewRoute,
+  AppJobsRoute: AppJobsRoute,
+  AppMockRoute: AppMockRoute,
+  AppResumeRoute: AppResumeRoute,
+  AppSkillGapRoute: AppSkillGapRoute,
+  AppStudyRoute: AppStudyRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AppRoute: AppRoute,
+  AppRoute: AppRouteWithChildren,
   LoginRoute: LoginRoute,
   SignupRoute: SignupRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
