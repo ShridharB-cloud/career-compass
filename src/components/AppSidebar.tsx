@@ -41,7 +41,6 @@ export function AppSidebar() {
           return (
             <Link
               key={item.to}
-              // @ts-expect-error - dynamic string path
               to={item.to}
               className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-all ${
                 active

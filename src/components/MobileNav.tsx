@@ -31,7 +31,6 @@ export function MobileNav() {
             return (
               <Link
                 key={i.to}
-                // @ts-expect-error - dynamic string path
                 to={i.to}
                 className={`flex flex-col items-center justify-center gap-1 py-2.5 text-[10px] font-medium transition-colors ${
                   active ? "text-primary" : "text-muted-foreground"
@@ -53,7 +52,6 @@ export function MobileNav() {
             return (
               <Link
                 key={q.to}
-                // @ts-expect-error - dynamic string path
                 to={q.to}
                 className={`flex items-center gap-1.5 whitespace-nowrap rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
                   active
